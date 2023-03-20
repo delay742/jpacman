@@ -3,10 +3,12 @@ package nl.tudelft.jpacman.sprite;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.SimpleTimeZone;
 
 import nl.tudelft.jpacman.PacmanConfigurationException;
 import nl.tudelft.jpacman.board.Direction;
 import nl.tudelft.jpacman.npc.ghost.GhostColor;
+import nl.tudelft.jpacman.ui.IndexPacman;
 
 /**
  * Sprite Store containing the classic Pac-Man sprites.
@@ -14,7 +16,7 @@ import nl.tudelft.jpacman.npc.ghost.GhostColor;
  * @author Jeroen Roosen 
  */
 public class PacManSprites extends SpriteStore {
-
+    
     /**
      * The sprite files are vertically stacked series for each direction, this
      * array denotes the order.
@@ -50,20 +52,45 @@ public class PacManSprites extends SpriteStore {
      * The delay between frames.
      */
     private static final int ANIMATION_DELAY = 200;
+    private IndexPacman indexPacman;
 
     /**
      * @return A map of animated Pac-Man sprites for all directions.
      */
-    public Map<Direction, Sprite> getPacmanSprites() {
-        return directionSprite("/sprite/pacman.png", PACMAN_ANIMATION_FRAMES);
+    public String currentThemeHere;
+
+    public PacManSprites() {
+    }
+
+    public PacManSprites(String g) {
+
+    }
+
+    public Map<Direction, Sprite> getPacmanSprites(String currentTheme) {
+        if (currentThemeHere == "A")
+            return directionSprite("/sprite/default/pacman.png", PACMAN_ANIMATION_FRAMES);
+        else if (currentThemeHere == "B")
+            return directionSprite("/sprite/amongus/pacman.png", PACMAN_ANIMATION_FRAMES);
+        else if (currentThemeHere == "C")
+            return directionSprite("/sprite/squid/pacman.png", PACMAN_ANIMATION_FRAMES);
+        else
+            return directionSprite("/sprite/zoo/pacman.png", PACMAN_ANIMATION_FRAMES);
     }
 
     /**
      * @return The animation of a dying Pac-Man.
      */
     public AnimatedSprite getPacManDeathAnimation() {
-        String resource = "/sprite/dead.png";
-
+        String resource;
+        if (currentThemeHere == "A") {
+            resource = "/sprite/default/dead.png";
+        } else if (currentThemeHere == "B") {
+            resource = "/sprite/amongus/dead.png";
+        } else if (currentThemeHere == "C") {
+            resource = "/sprite/squid/dead.png";
+        } else {
+            resource = "/sprite/zoo/dead.png";
+        }
         Sprite baseImage = loadSprite(resource);
         AnimatedSprite animation = createAnimatedSprite(baseImage, PACMAN_DEATH_FRAMES,
             ANIMATION_DELAY, false);
@@ -106,9 +133,20 @@ public class PacManSprites extends SpriteStore {
      */
     public Map<Direction, Sprite> getGhostSprite(GhostColor color) {
         assert color != null;
-
-        String resource = "/sprite/ghost_" + color.name().toLowerCase()
-            + ".png";
+        String resource;
+        if (currentThemeHere == "A") {
+             resource = "/sprite/default/ghost_" + color.name().toLowerCase()
+                + ".png";
+        } else if (currentThemeHere == "B") {
+            resource = "/sprite/amongus/ghost_" + color.name().toLowerCase()
+                + ".png";
+        } else if (currentThemeHere == "C") {
+            resource = "/sprite/squid/ghost_" + color.name().toLowerCase()
+                + ".png";
+        } else {
+            resource = "/sprite/zoo/ghost_" + color.name().toLowerCase()
+                + ".png";
+        }
         return directionSprite(resource, GHOST_ANIMATION_FRAMES);
     }
 
@@ -116,21 +154,41 @@ public class PacManSprites extends SpriteStore {
      * @return The sprite for the wall.
      */
     public Sprite getWallSprite() {
-        return loadSprite("/sprite/wall.png");
+        if (currentThemeHere == "A")
+            return loadSprite("/sprite/default/wall.png");
+        else if (currentThemeHere == "B")
+            return loadSprite("/sprite/amongus/wall.png");
+        else if (currentThemeHere == "C")
+            return loadSprite("/sprite/squid/wall.png");
+        else
+            return loadSprite("/sprite/zoo/wall.png");
     }
 
     /**
      * @return The sprite for the ground.
      */
     public Sprite getGroundSprite() {
-        return loadSprite("/sprite/floor.png");
+        if (currentThemeHere == "A")
+            return loadSprite("/sprite/default/floor.png");
+        else if (currentThemeHere == "B")
+            return loadSprite("/sprite/amongus/floor.png");
+        else if (currentThemeHere == "C")
+            return loadSprite("/sprite/squid/floor.png");
+        else
+            return loadSprite("/sprite/zoo/floor.png");
     }
 
     /**
      * @return The sprite for the
      */
-    public Sprite getPelletSprite() {
-        return loadSprite("/sprite/pellet.png");
+    public Sprite getPelletSprite() {if (currentThemeHere == "A")
+        return loadSprite("/sprite/default/pellet.png");
+    else if (currentThemeHere == "B")
+        return loadSprite("/sprite/amongus/pellet.png");
+    else if (currentThemeHere == "C")
+        return loadSprite("/sprite/squid/pellet.png");
+    else
+        return loadSprite("/sprite/zoo/pellet.png");
     }
 
     /**

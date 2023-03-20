@@ -1,7 +1,6 @@
 package nl.tudelft.jpacman.ui;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
+import java.awt.*;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -11,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import nl.tudelft.jpacman.Launcher;
 import nl.tudelft.jpacman.game.Game;
 import nl.tudelft.jpacman.ui.ScorePanel.ScoreFormatter;
 
@@ -68,7 +68,7 @@ public class PacManUI extends JFrame {
     public PacManUI(final Game game, final Map<String, Action> buttons,
                     final Map<Integer, Action> keyMappings,
                     ScoreFormatter scoreFormatter) {
-        super("JPacman");
+        super("In-Game");
         assert game != null;
         assert buttons != null;
         assert keyMappings != null;
@@ -79,21 +79,24 @@ public class PacManUI extends JFrame {
         addKeyListener(keys);
 
         JPanel buttonPanel = new ButtonPanel(buttons, this);
-
-        scorePanel = new ScorePanel(game.getPlayers());
+        Container contentPanel = getContentPane();
+        scorePanel = new ScorePanel(game.getPlayers(), game);
+        game.setScorePanel(scorePanel);
         if (scoreFormatter != null) {
             scorePanel.setScoreFormatter(scoreFormatter);
+            System.out.println("scoreFormatter != null");
         }
 
         boardPanel = new BoardPanel(game);
-
-        Container contentPanel = getContentPane();
         contentPanel.setLayout(new BorderLayout());
         contentPanel.add(buttonPanel, BorderLayout.SOUTH);
         contentPanel.add(scorePanel, BorderLayout.NORTH);
         contentPanel.add(boardPanel, BorderLayout.CENTER);
 
+        setPreferredSize(new Dimension(500, 500));
+
         pack();
+        System.out.println("PacManUI");
     }
 
     /**
@@ -104,6 +107,7 @@ public class PacManUI extends JFrame {
         setVisible(true);
         ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
         service.scheduleAtFixedRate(this::nextFrame, 0, FRAME_INTERVAL, TimeUnit.MILLISECONDS);
+        System.out.println("start whit ui");
     }
 
     /**
@@ -113,4 +117,6 @@ public class PacManUI extends JFrame {
         boardPanel.repaint();
         scorePanel.refresh();
     }
+
+
 }

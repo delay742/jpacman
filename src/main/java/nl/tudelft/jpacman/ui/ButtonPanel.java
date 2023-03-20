@@ -1,10 +1,10 @@
 package nl.tudelft.jpacman.ui;
 
+import java.awt.*;
 import java.util.Map;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 /**
  * A panel containing a button for every registered action.
@@ -34,7 +34,25 @@ class ButtonPanel extends JPanel {
                 buttons.get(caption).doAction();
                 parent.requestFocusInWindow();
             });
+            System.out.println(button.getText());
+            if (button.getText().equals("Start"))
+                button.setIcon(new ImageIcon("src/main/resources/img/button/start_36.png"));
+            else if (button.getText().equals("Stop")) {
+                button.setIcon(new ImageIcon("src/main/resources/img/button/stop_36.png"));
+            } else {
+                button.setIcon(new ImageIcon("src/main/resources/img/button/back_36.png"));
+            }
+
+//            EmptyBorder emptyBorder = new EmptyBorder(100, 0, 0, 0);
+//
+//            button.setBorder(emptyBorder);
+            button.setOpaque(false);
+            button.setBorder(null);
+            button.setBorderPainted(false);
+            button.setContentAreaFilled(false);
+            button.setText("");
             add(button);
         }
+        setBackground(new Color(32, 13, 41));
     }
 }

@@ -37,7 +37,7 @@ public class StartupSystemTest {
      */
     @Test
     public void gameIsRunning() {
-        launcher.launch();
+//        launcher.launch();
 
         getGame().start();
 

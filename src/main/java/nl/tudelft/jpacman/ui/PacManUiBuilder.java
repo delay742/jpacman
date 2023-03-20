@@ -1,11 +1,18 @@
 package nl.tudelft.jpacman.ui;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import nl.tudelft.jpacman.Launcher;
 import nl.tudelft.jpacman.game.Game;
 import nl.tudelft.jpacman.ui.ScorePanel.ScoreFormatter;
+
+import javax.swing.*;
 
 /**
  * Builder for the JPac-Man UI.
@@ -23,6 +30,8 @@ public class PacManUiBuilder {
      * Caption for the default start button.
      */
     private static final String START_CAPTION = "Start";
+
+    private static final String BACK_CAPTION = "Back";
 
     /**
      * Map of buttons and their actions.
@@ -51,6 +60,7 @@ public class PacManUiBuilder {
         this.defaultButtons = false;
         this.buttons = new LinkedHashMap<>();
         this.keyMappings = new HashMap<>();
+        System.out.println("PacManUiBuilder");
     }
 
     /**
@@ -65,8 +75,11 @@ public class PacManUiBuilder {
 
         if (defaultButtons) {
             addStartButton(game);
+            addBackButton(game);
             addStopButton(game);
+            System.out.println("defaultButtons");
         }
+        System.out.println("build");
         return new PacManUI(game, buttons, keyMappings, scoreFormatter);
     }
 
@@ -79,8 +92,8 @@ public class PacManUiBuilder {
      */
     private void addStopButton(final Game game) {
         assert game != null;
-
         buttons.put(STOP_CAPTION, game::stop);
+        System.out.println("addStopButton");
     }
 
     /**
@@ -92,9 +105,16 @@ public class PacManUiBuilder {
      */
     private void addStartButton(final Game game) {
         assert game != null;
-
         buttons.put(START_CAPTION, game::start);
+        System.out.println("addStartButton");
     }
+
+    private void addBackButton(final Game game) {
+        assert game != null;
+        buttons.put(BACK_CAPTION,game::back);
+        System.out.println("addBackButton");
+    }
+
 
     /**
      * Adds a key listener to the UI.
@@ -110,6 +130,7 @@ public class PacManUiBuilder {
         assert action != null;
 
         keyMappings.put(keyCode, action);
+        System.out.println("addKey");
         return this;
     }
 
@@ -128,6 +149,7 @@ public class PacManUiBuilder {
         assert action != null;
 
         buttons.put(caption, action);
+        System.out.println("addButton");
         return this;
     }
 
@@ -141,6 +163,7 @@ public class PacManUiBuilder {
         defaultButtons = true;
         buttons.put(START_CAPTION, null);
         buttons.put(STOP_CAPTION, null);
+        System.out.println("withDefaultButtons");
         return this;
     }
 
@@ -154,6 +177,7 @@ public class PacManUiBuilder {
      */
     public PacManUiBuilder withScoreFormatter(ScoreFormatter scoreFormatter) {
         this.scoreFormatter = scoreFormatter;
+        System.out.println("withScoreFormatter");
         return this;
     }
 }

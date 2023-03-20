@@ -55,7 +55,7 @@ class JPacmanFuzzer {
     @BeforeEach
     void setUpGame() {
         launcher = new Launcher();
-        launcher.launch();
+//        launcher.launch();
     }
 
     /**
