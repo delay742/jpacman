@@ -30,17 +30,19 @@ import nl.tudelft.jpacman.ui.PacManUiBuilder;
 public class Launcher {
 
     private static final PacManSprites SPRITE_STORE = new PacManSprites();
-
-    public static final String DEFAULT_MAP = "/board.txt";
-    private String levelMap = DEFAULT_MAP;
-
+    private String currentIndex = "";
+    private static String levelMap ;
+    public static void board(String levelName) {
+        levelMap = levelName;
+    }
     private PacManUI pacManUI;
     private Game game;
 
-    /**
-     * @return The game object this launcher will start when {@link #launch()}
-     *         is called.
-     */
+//
+//    /**
+//     * @return The game object this launcher will start when {@link #launch()}
+//     *         is called.
+//     */
     public Game getGame() {
         return game;
     }
@@ -66,15 +68,21 @@ public class Launcher {
         return this;
     }
 
+    public Launcher () {
+
+    }
+
+
+
     /**
      * Creates a new game using the level from {@link #makeLevel()}.
      *
      * @return a new Game.
      */
-    public Game makeGame() {
+    public Game makeGame(String currentTheme) {
         GameFactory gf = getGameFactory();
         Level level = makeLevel();
-        game = gf.createSinglePlayerGame(level, loadPointCalculator());
+        game = gf.createSinglePlayerGame(level, loadPointCalculator(), currentTheme);
         return game;
     }
 
@@ -84,7 +92,7 @@ public class Launcher {
 
     /**
      * Creates a new level. By default this method will use the map parser to
-     * parse the default board stored in the <code>board.txt</code> resource.
+     * parse the default board stored in the <code>board6.txt</code> resource.
      *
      * @return A new level.
      */
@@ -155,7 +163,7 @@ public class Launcher {
      * @param builder
      *            The {@link PacManUiBuilder} that will provide the UI.
      */
-    protected void addSinglePlayerKeys(final PacManUiBuilder builder) {
+    public void addSinglePlayerKeys(final PacManUiBuilder builder) {
         builder.addKey(KeyEvent.VK_UP, moveTowardsDirection(Direction.NORTH))
                 .addKey(KeyEvent.VK_DOWN, moveTowardsDirection(Direction.SOUTH))
                 .addKey(KeyEvent.VK_LEFT, moveTowardsDirection(Direction.WEST))
@@ -180,12 +188,16 @@ public class Launcher {
     /**
      * Creates and starts a JPac-Man game.
      */
-    public void launch() {
-        makeGame();
+    public void launch(String currentTheme) {
+        SPRITE_STORE.currentThemeHere = currentTheme;
+        makeGame(currentTheme);
+        game.setCurrentTheme(currentTheme);
+        game.setLevelMap(levelMap);
         PacManUiBuilder builder = new PacManUiBuilder().withDefaultButtons();
         addSinglePlayerKeys(builder);
         pacManUI = builder.build(getGame());
         pacManUI.start();
+
     }
 
     /**
@@ -195,7 +207,7 @@ public class Launcher {
      * Precondition: The game was launched first.
      */
     public void dispose() {
-        assert pacManUI != null;
+        //assert pacManUI != null;
         pacManUI.dispose();
     }
 
@@ -207,7 +219,7 @@ public class Launcher {
      * @throws IOException
      *             When a resource could not be read.
      */
-    public static void main(String[] args) throws IOException {
-        new Launcher().launch();
-    }
+//    public static void main(String[] args) throws IOException {
+//        new Launcher().launch();
+//    }
 }
