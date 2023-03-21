@@ -42,7 +42,7 @@ public class PopUpLose extends JFrame {
 
         // Third row: Back button and Retry button
         backButton = new JButton(new ImageIcon("src/main/resources/img/button/back.png"));
-        backButton.setBorder(new EmptyBorder(100,50,0,0));
+        backButton.setBorder(new EmptyBorder(50,50,0,0));
         backButton.setContentAreaFilled(false);
         c.gridx = 0;
         c.gridy = 2;
