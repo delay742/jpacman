@@ -161,7 +161,7 @@ public abstract class Game implements LevelObserver {
         PopUpWin popUpWin = new PopUpWin(player_score.getScore(),getCurrentTheme(),getLevelMap());
         popUpWin.setVisible(true);
         dialog = new JDialog();
-        dialog.setUndecorated(false);
+        dialog.setUndecorated(true);
         dialog.setContentPane(popUpWin.getContentPane());
         dialog.setModal(false);
         dialog.setAlwaysOnTop(true);

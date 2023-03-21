@@ -349,5 +349,25 @@ public class IndexPacman extends JFrame implements ActionListener {
     public String getCurrentTheme() {
         return currentTheme;
     }
+
+    public void setLevelName(String s) {
+        this.levelName = s;
+    }
+
+    public String getLevelName() {
+        return this.levelName;
+    }
+
+    public void setCurrentTheme(String a) {
+        this.currentTheme = a;
+    }
+
+    public void setCurrentMap(String currentMap) {
+        this.currentMap = currentMap;
+    }
+
+    public String getCurrentMap() {
+        return currentMap;
+    }
 }
 

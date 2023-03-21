@@ -15,34 +15,23 @@ public class PopUpWin extends JFrame {
         super("My Game");
 
 
-        JLabel panel = new JLabel(new ImageIcon("src/main/resources/img/popup/popup_win_300.png"));
+        JLabel panel = new JLabel(new ImageIcon("src/main/resources/img/popup/popup_win_400x300.png"));
         panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
         // First row: Score label
         JLabel scoreLabel = new JLabel(""+score);
-        scoreLabel.setBorder(new EmptyBorder(170,180,0,0));
-        scoreLabel.setFont(new Font("SansSerif",Font.BOLD,50));
+        scoreLabel.setBorder(new EmptyBorder(100,160,0,0));
+        scoreLabel.setFont(new Font("SansSerif",Font.BOLD,20));
         scoreLabel.setForeground(Color.green);
-        c.gridx = 0;
-        c.gridy = 0;
-        c.anchor = GridBagConstraints.LINE_START;
-        panel.add(scoreLabel, c);
-
-        // Second row: Highscore label
-
-        JLabel highscoreLabel = new JLabel("");
-        highscoreLabel.setBorder(new EmptyBorder(0,170,0,0));
-        highscoreLabel.setFont(new Font("SansSerif",Font.BOLD,20));
-        highscoreLabel.setForeground(Color.white);
         c.gridx = 0;
         c.gridy = 1;
         c.anchor = GridBagConstraints.LINE_START;
-        panel.add(highscoreLabel, c);
+        panel.add(scoreLabel, c);
 
         // Third row: Back button and Retry button
         backButton = new JButton(new ImageIcon("src/main/resources/img/button/back.png"));
-        backButton.setBorder(new EmptyBorder(100,50,0,0));
+        backButton.setBorder(new EmptyBorder(50,50,0,0));
         backButton.setContentAreaFilled(false);
         c.gridx = 0;
         c.gridy = 2;
@@ -63,7 +52,7 @@ public class PopUpWin extends JFrame {
             }
         });
         JButton retryButton = new JButton(new ImageIcon("src/main/resources/img/button/retry.png"));
-        retryButton.setBorder(new EmptyBorder(100,0,0,50));
+        retryButton.setBorder(new EmptyBorder(50,0,0,50));
         retryButton.setContentAreaFilled(false);
         c.gridx = 1;
         c.gridy = 2;
@@ -88,17 +77,15 @@ public class PopUpWin extends JFrame {
         getContentPane().add(panel);
         setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
     }
 
     public JButton getBackButton() {
         return backButton;
     }
 
-    public static void main(String[] args) {
-        PopUpWin frame = new PopUpWin(100,"","");
-        frame.setSize(600,534);
-
-    }
+//    public static void main(String[] args) {
+//        PopUpWin frame = new PopUpWin(100,"","");
+//        frame.setSize(400,300);
+//        frame.setVisible(true);
+//    }
 }
