@@ -15,30 +15,30 @@ public class PopUpLose extends JFrame {
         super("My Game");
 
 
-        JLabel panel = new JLabel(new ImageIcon("src/main/resources/img/popup/popup_gameover_300.png"));
+        JLabel panel = new JLabel(new ImageIcon("src/main/resources/img/popup/popup_gameover_400x300.png"));
         panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
         // First row: Score label
         JLabel scoreLabel = new JLabel(""+score);
-        scoreLabel.setBorder(new EmptyBorder(170,180,0,0));
-        scoreLabel.setFont(new Font("SansSerif",Font.BOLD,50));
+        scoreLabel.setBorder(new EmptyBorder(100,160,0,0));
+        scoreLabel.setFont(new Font("SansSerif",Font.BOLD,20));
         scoreLabel.setForeground(Color.red);
         c.gridx = 0;
-        c.gridy = 0;
+        c.gridy = 1;
         c.anchor = GridBagConstraints.LINE_START;
         panel.add(scoreLabel, c);
 
         // Second row: Highscore label
 
-        JLabel highscoreLabel = new JLabel("");
-        highscoreLabel.setBorder(new EmptyBorder(0,170,0,0));
-        highscoreLabel.setFont(new Font("SansSerif",Font.BOLD,20));
-        highscoreLabel.setForeground(Color.white);
-        c.gridx = 0;
-        c.gridy = 1;
-        c.anchor = GridBagConstraints.LINE_START;
-        panel.add(highscoreLabel, c);
+//        JLabel highscoreLabel = new JLabel("");
+//        highscoreLabel.setBorder(new EmptyBorder(0,170,0,0));
+//        highscoreLabel.setFont(new Font("SansSerif",Font.BOLD,20));
+//        highscoreLabel.setForeground(Color.white);
+//        c.gridx = 0;
+//        c.gridy = 1;
+//        c.anchor = GridBagConstraints.LINE_START;
+//        panel.add(highscoreLabel, c);
 
         // Third row: Back button and Retry button
         backButton = new JButton(new ImageIcon("src/main/resources/img/button/back.png"));
@@ -63,7 +63,7 @@ public class PopUpLose extends JFrame {
         });
 
         JButton retryButton = new JButton(new ImageIcon("src/main/resources/img/button/retry.png"));
-        retryButton.setBorder(new EmptyBorder(100,0,0,50));
+        retryButton.setBorder(new EmptyBorder(50,0,0,50));
         retryButton.setContentAreaFilled(false);
         c.gridx = 1;
         c.gridy = 2;
@@ -88,8 +88,6 @@ public class PopUpLose extends JFrame {
         getContentPane().add(panel);
         setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
     }
 
     public JButton getBackButton() {
@@ -98,7 +96,7 @@ public class PopUpLose extends JFrame {
 
     public static void main(String[] args) {
 //        PopUpLose frame = new PopUpLose(100, "A", "/map1.txt");
-//        frame.setSize(600,534);
-
+//        frame.setSize(400,300);
+//        frame.setVisible(true);
     }
 }
