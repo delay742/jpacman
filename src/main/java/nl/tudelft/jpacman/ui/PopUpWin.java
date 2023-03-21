@@ -87,9 +87,8 @@ public class PopUpWin extends JFrame {
         });
         getContentPane().add(panel);
         setUndecorated(true);
-        pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+
 
     }
 

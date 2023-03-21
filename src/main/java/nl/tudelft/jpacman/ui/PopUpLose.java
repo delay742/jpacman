@@ -61,6 +61,7 @@ public class PopUpLose extends JFrame {
                 indexPacman.setVisible(true);
             }
         });
+
         JButton retryButton = new JButton(new ImageIcon("src/main/resources/img/button/retry.png"));
         retryButton.setBorder(new EmptyBorder(100,0,0,50));
         retryButton.setContentAreaFilled(false);
@@ -86,9 +87,8 @@ public class PopUpLose extends JFrame {
         });
         getContentPane().add(panel);
         setUndecorated(true);
-        pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+
 
     }
 

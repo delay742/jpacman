@@ -105,6 +105,7 @@ public abstract class Game implements LevelObserver {
             IndexPacman indexPacman = new IndexPacman();
 
             indexPacman.setVisible(true);
+
         }
     };
     /**
@@ -150,7 +151,7 @@ public abstract class Game implements LevelObserver {
         PopUpWin popUpWin = new PopUpWin(player_score.getScore(),getCurrentTheme(),getLevelMap());
         popUpWin.setVisible(true);
         JDialog dialog = new JDialog();
-        dialog.setUndecorated(true);
+        dialog.setUndecorated(false);
         dialog.setContentPane(popUpWin.getContentPane());
         dialog.setModal(false);
         dialog.setAlwaysOnTop(true);
