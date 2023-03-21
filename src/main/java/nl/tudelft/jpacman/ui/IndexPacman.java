@@ -39,7 +39,7 @@ public class IndexPacman extends JFrame implements ActionListener {
         currentMap = "Map1";
 
         // Set up JFrame
-        setTitle("Main Menu");
+        setTitle("Menu JPacman");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();

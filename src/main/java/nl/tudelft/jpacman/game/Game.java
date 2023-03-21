@@ -28,6 +28,7 @@ import javax.swing.*;
 public abstract class Game implements LevelObserver {
     Player player_score;
     ScorePanel scorePanel;
+    JDialog dialog;
     /**
      * <code>true</code> if the game is in progress.
      */
@@ -96,14 +97,23 @@ public abstract class Game implements LevelObserver {
     public void back() {
         synchronized (progressLock) {
             stop();
-            Window[] windows = Window.getWindows();
-            for (Window window : windows) {
-                if (window instanceof JFrame) {
-                    window.dispose();
+            if (dialog != null) {
+                Window[] windows = Window.getWindows();
+                for (Window window : windows) {
+                    if (window instanceof JFrame) {
+                        window.dispose();
+                    }
+                }
+                dialog.dispose();
+            } else {
+                Window[] windows = Window.getWindows();
+                for (Window window : windows) {
+                    if (window instanceof JFrame) {
+                        window.dispose();
+                    }
                 }
             }
             IndexPacman indexPacman = new IndexPacman();
-
             indexPacman.setVisible(true);
 
         }
@@ -150,7 +160,7 @@ public abstract class Game implements LevelObserver {
         stop();
         PopUpWin popUpWin = new PopUpWin(player_score.getScore(),getCurrentTheme(),getLevelMap());
         popUpWin.setVisible(true);
-        JDialog dialog = new JDialog();
+        dialog = new JDialog();
         dialog.setUndecorated(false);
         dialog.setContentPane(popUpWin.getContentPane());
         dialog.setModal(false);
@@ -195,7 +205,7 @@ public abstract class Game implements LevelObserver {
         stop();
         PopUpLose popUpLose = new PopUpLose(player_score.getScore(),getCurrentTheme(),getLevelMap());
         popUpLose.setVisible(true);
-        JDialog dialog = new JDialog();
+        dialog = new JDialog();
         dialog.setUndecorated(true);
         dialog.setContentPane(popUpLose.getContentPane());
         dialog.setModal(false);
